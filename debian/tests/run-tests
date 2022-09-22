@@ -1,0 +1,27 @@
+#!/bin/bash
+
+set -x
+set -e
+ 
+pkg=libspdlog-dev
+if [ "$AUTOPKGTEST_TMP" = "" ] ; then
+  AUTOPKGTEST_TMP=`mktemp -d /tmp/${pkg}-test.XXXXXX`
+  trap "rm -rf $AUTOPKGTEST_TMP" 0 INT QUIT ABRT PIPE TERM
+fi
+cd $AUTOPKGTEST_TMP
+
+export CFLAGS=-O2
+export CXXFLAGS=-O2
+cp -r /usr/share/doc/libspdlog-dev/tests/ .
+cp -r /usr/share/doc/libspdlog-dev/examples/example/ .
+mkdir cmake example_build
+cp /usr/share/doc/libspdlog-dev/utils.cmake cmake/
+cd tests
+for file in *.gz; do gunzip ${file}; done
+cmake -DSPDLOG_BUILD_TESTS=ON -DSPDLOG_BUILD_TESTS_HO=ON -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON .
+make -j$(nproc) spdlog-utests-ho spdlog-utests
+CTEST_PARALLEL_LEVEL=1 ctest -j1 --force-new-ctest-process
+cd ../example_build
+cmake -DCMAKE_BUILD_TYPE=Release ../example
+make
+./example

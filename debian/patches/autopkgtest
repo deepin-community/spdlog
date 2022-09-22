@@ -1,0 +1,14 @@
+From: Michael R. Crusoe <crusoe@debian.org>
+Subject: Enable running the tests against an installed copy of spdlog
+Forwarded: not-needed
+--- a/example/CMakeLists.txt
++++ b/example/CMakeLists.txt
+@@ -3,6 +3,8 @@
+ cmake_minimum_required(VERSION 3.10)
+ project(spdlog_examples CXX)
+ 
++include(../cmake/utils.cmake)
++
+ if(NOT TARGET spdlog)
+     # Stand-alone build
+     find_package(spdlog REQUIRED)

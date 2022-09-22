@@ -1,0 +1,51 @@
+#!/usr/bin/make -f
+
+#export DH_VERBOSE=1
+ifneq (,$(filter $(DEB_HOST_ARCH), armel m68k mips mipsel powerpc powerpcspe sh4))
+  export DEB_LDFLAGS_MAINT_APPEND=-latomic
+endif
+
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+soversion = 1
+fmtabi = $(shell apt show libfmt-dev 2>/dev/null | sed -n 's/Depends: .*libfmt\([0-9]*\) .*/\1/p')
+spdlogfmtabi = libspdlog$(soversion)-fmt$(fmtabi)
+
+%:
+	dh $@ --with pkgkde_symbolshelper --buildsystem=cmake
+
+# meson, not recommended by upstream
+#override_dh_auto_configure:
+#	dh_auto_configure -- -Denable_tests=true -Dexternal_fmt=true -Dlibrary_type=shared
+
+override_dh_auto_configure:
+	rm -Rf include/spdlog/fmt/bundled/
+ifeq (,$(filter nocheck,$(DEB_BUILD_OPTIONS) $(DEB_BUILD_PROFILES)))
+	dh_auto_configure -- -DSPDLOG_BUILD_EXAMPLE=ON \
+		-DSPDLOG_BUILD_EXAMPLE_HO=ON \
+		-DSPDLOG_BUILD_TESTS=ON \
+		-DSPDLOG_FMT_EXTERNAL=ON \
+		-DSPDLOG_BUILD_TESTS_HO=ON \
+		-DSPDLOG_BUILD_SHARED=ON
+else
+	dh_auto_configure -- -DSPDLOG_BUILD_EXAMPLE=OFF \
+		-DSPDLOG_BUILD_EXAMPLE_HO=OFF \
+		-DSPDLOG_BUILD_TESTS=OFF \
+		-DSPDLOG_FMT_EXTERNAL=ON \
+		-DSPDLOG_BUILD_TESTS_HO=OFF \
+		-DSPDLOG_BUILD_SHARED=ON
+endif
+
+override_dh_auto_test:
+	dh_auto_test --no-parallel
+
+override_dh_auto_install:
+	rm -f example/logs/.gitignore
+	dh_auto_install
+	find debian -name .gitignore -delete
+
+override_dh_gencontrol:
+	dh_gencontrol -- -Vspdlog:Provides=$(spdlogfmtabi)
+
+override_dh_makeshlibs:
+	dh_makeshlibs -plibspdlog$(soversion) -V '$(spdlogfmtabi)'

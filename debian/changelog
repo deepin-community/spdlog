@@ -1,0 +1,294 @@
+spdlog (1:1.8.5+ds-3) unstable; urgency=medium
+
+  * Ignore vendored copy of catch.hpp; use the one from the catch2
+    package instead. Closes: #993511
+
+ -- Michael R. Crusoe <crusoe@debian.org>  Fri, 17 Sep 2021 14:59:55 +0200
+
+spdlog (1:1.8.5+ds-2) unstable; urgency=medium
+
+  * Fix autopkgtests by tweaking our patch and matching compilation flags
+    better. (Closes: #992977)
+
+ -- Michael R. Crusoe <crusoe@debian.org>  Thu, 26 Aug 2021 13:20:09 +0200
+
+spdlog (1:1.8.5+ds-1) unstable; urgency=medium
+
+  * Team upload
+
+  [ Pino Toscano ]
+  * Limit libsystemd-dev build dependency to linux-any
+  * Fix dh_auto_test override
+
+  [ xiao sheng wen ]
+  * New upstream version 1.8.5+ds (Closes: #992359)
+  * d/watch: fix typo
+
+ -- xiao sheng wen <atzlinux@sina.com>  Mon, 07 Jun 2021 11:03:13 +0800
+
+spdlog (1:1.8.1+ds-2.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Track fmtlib abi in libspdlog1 (Closes: #978471)
+
+ -- Shengjing Zhu <zhsj@debian.org>  Wed, 30 Dec 2020 02:30:44 +0800
+
+spdlog (1:1.8.1+ds-2) unstable; urgency=medium
+
+  [ Shengjing Zhu ]
+  * Drop symbols file
+    Closes: #977454
+
+ -- Andreas Tille <tille@debian.org>  Tue, 15 Dec 2020 18:33:59 +0100
+
+spdlog (1:1.8.1+ds-1) unstable; urgency=medium
+
+  * Team upload
+
+  [ Michael R. Crusoe ]
+  * New upstream version
+  * debhelper-compat 13 (routine-update)
+  * Freshen patches
+
+  [ Andreas Tille ]
+  * Provide symbols file for amd64 only to reduce maintenance burden
+    Closes: #966959
+  * Standards-Version: 4.5.1 (routine-update)
+
+ -- Andreas Tille <tille@debian.org>  Wed, 09 Dec 2020 09:50:06 +0100
+
+spdlog (1:1.5.0+ds-5) unstable; urgency=medium
+
+  [ Matthias Klose ]
+  * Mark one more symbol as optional for ppc64 when building with -O3.
+    Closes: #961134
+
+  [ Michael R. Crusoe ]
+  * Move libfmt-dev dependency from libspdlog1 to libspdlog-dev.
+    Closes: #962089
+  * Adjust libspdlog1 symbols for buster-bpo/amd64. Closes: #963481
+  * Rules-Requires-Root: no (routine-update)
+  * Set upstream metadata fields: Bug-Database, Bug-Submit, Repository,
+    Repository-Browse.
+
+ -- Michael R. Crusoe <crusoe@debian.org>  Mon, 22 Jun 2020 17:20:18 +0200
+
+spdlog (1:1.5.0+ds-4) unstable; urgency=medium
+
+  * Team upload.
+
+  [ Michael R. Crusoe ]
+  * Update Michael's email address
+
+  [ Nilesh Patra ]
+  * Use system libfmt by default
+    Closes: #956694
+
+  [ Andreas Tille ]
+  * Add salsa-ci.yml
+
+ -- Nilesh Patra <npatra974@gmail.com>  Sun, 14 Jun 2020 20:46:53 +0200
+
+spdlog (1:1.5.0+ds-3) unstable; urgency=medium
+
+  * Speed up nocheck build profile by not building the tests & example
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Tue, 03 Mar 2020 11:44:57 +0100
+
+spdlog (1:1.5.0+ds-3~rc1) experimental; urgency=medium
+
+  * Hopefully the final symbols refresh for 1.5.0
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Tue, 03 Mar 2020 08:50:12 +0100
+
+spdlog (1:1.5.0+ds-3~rc0) experimental; urgency=medium
+
+  * Depend on newer libfmt (Closes: #952625)
+  * libspdlog-dev is Multi-Arch: same
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sun, 01 Mar 2020 11:45:33 +0100
+
+spdlog (1:1.5.0+ds-2) unstable; urgency=medium
+
+  * Add Build-Depends-Package meta-information field
+  * Refresh symbols
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Wed, 26 Feb 2020 11:14:14 +0100
+
+spdlog (1:1.5.0+ds-1) unstable; urgency=medium
+
+  * Mark libspdlog1 as Multi-Arch: same
+  * Repack source to remove newer libfmt (Closes: #952543)
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Tue, 25 Feb 2020 19:22:37 +0100
+
+spdlog (1:1.5.0-1) unstable; urgency=medium
+
+  * Release to unstable with updated symbols
+  * Use the packaged (older) libfmt package instead of bundled libfmt
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sun, 09 Feb 2020 09:14:13 +0100
+
+spdlog (1:1.5.0-1~rc1) experimental; urgency=medium
+
+  * Include symbols file
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sat, 08 Feb 2020 15:28:01 +0100
+
+spdlog (1:1.5.0-1~rc0) experimental; urgency=medium
+
+  * New upstream version
+  * debhelper-compat 12
+  * Standards-Version: 4.5.0
+  * Set upstream metadata fields: Name.
+  * Set upstream metadata fields: Repository.
+  * Remove obsolete fields Name from debian/upstream/metadata.
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Fri, 07 Feb 2020 12:22:39 +0100
+
+spdlog (1:1.3.1-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Mon, 21 Jan 2019 08:15:35 -0800
+
+spdlog (1:1.3.0-2) unstable; urgency=medium
+
+  * No point in building benchmarks, causes issues on some unofficial
+    archs.
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sat, 12 Jan 2019 09:59:25 -0800
+
+spdlog (1:1.3.0-1) unstable; urgency=medium
+
+  * debian/control: Mark us as Multi-Arch: same.
+  * New upstream version
+  * Build the benchmark.
+  * Standards-Version: 4.3.0, no changes needed
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sat, 12 Jan 2019 06:52:15 -0800
+
+spdlog (1:1.2.1-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Wed, 28 Nov 2018 23:54:29 -0800
+
+spdlog (1:1.2.0-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Wed, 17 Oct 2018 03:10:17 -0700
+
+spdlog (1:1.1.0-2) unstable; urgency=medium
+
+  * Team upload.
+  * Drop debian/gdb.conf (specifying only defaults)
+  * Fix build on several architectures (Thanks for the patch to
+    Adrian Bunk <bunk@debian.org>)
+    Closes: #909938
+
+ -- Andreas Tille <tille@debian.org>  Mon, 01 Oct 2018 08:31:40 +0200
+
+spdlog (1:1.1.0-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version
+    Closes: #909197
+  * Standards-Version: 4.2.1
+  * Respect DEB_BUILD_OPTIONS in override_dh_auto_test
+
+ -- Andreas Tille <tille@debian.org>  Wed, 19 Sep 2018 21:38:22 +0200
+
+spdlog (1:0.17.0-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version
+  * debhelper 11
+  * Point Vcs fields to salsa.debian.org
+  * Standards-Version: 4.1.4
+
+ -- Andreas Tille <tille@debian.org>  Mon, 28 May 2018 21:20:54 +0200
+
+spdlog (1:0.16.3-1) unstable; urgency=medium
+
+  * New upstream version
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sat, 17 Feb 2018 09:02:28 -0800
+
+spdlog (1:0.14.0-1) unstable; urgency=medium
+
+  * Team upload.
+  * New upstream version
+    Closes: #882606
+  * debhelper 10
+
+ -- Andreas Tille <tille@debian.org>  Sat, 02 Dec 2017 08:06:47 +0100
+
+spdlog (1:0.11.0-3) unstable; urgency=medium
+
+  * Allow stderr, fixes autopkgtests; fix courtesy Graham Inggs
+    <ginggs@debian.org>. (Closes: #854469)
+  * Update standards-version to 4.1.1; no changes needed.
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sat, 14 Oct 2017 10:30:35 -0700
+
+spdlog (1:0.11.0-2) unstable; urgency=medium
+
+  * Correct URL to upstream
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sun, 09 Oct 2016 05:26:25 -0700
+
+spdlog (1:0.11.0-1) unstable; urgency=medium
+
+  * Switch to correct upstream, increment epoch due to different version
+    numbering. Mea culpa!
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sun, 09 Oct 2016 01:30:45 -0700
+
+spdlog (1.12-1) unstable; urgency=medium
+
+  * new upstream release
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sun, 18 Sep 2016 05:52:07 -0700
+
+spdlog (1.11-1) unstable; urgency=medium
+
+  * new upstream release
+  * debian/copyright: updated to track latest code movement
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Fri, 26 Aug 2016 09:23:31 -0700
+
+spdlog (1.8-1) unstable; urgency=medium
+
+  * new upstream release
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Tue, 17 May 2016 02:52:07 -0700
+
+spdlog (1.7-1) unstable; urgency=medium
+
+  * new upstream release
+  * Standards-Version: increment to 3.9.8
+  * Match upstream's switch to cmake
+
+ -- Michael R. Crusoe <michael.crusoe@gmail.com>  Sat, 14 May 2016 11:06:05 -0700
+
+spdlog (1.6-2) unstable; urgency=medium
+
+  * Fix VCS-Git URL.
+
+ -- Michael R. Crusoe <crusoe@ucdavis.edu>  Sun, 28 Feb 2016 17:10:41 -0800
+
+spdlog (1.6-1) unstable; urgency=medium
+
+  * Update to version 1.6
+  * Ship examples, tests. Run the tests during build time and added
+    autopkgtest hook.
+
+ -- Michael R. Crusoe <crusoe@ucdavis.edu>  Sat, 30 Jan 2016 05:33:59 -0800
+
+spdlog (1.4-1) unstable; urgency=low
+
+  * Initial release (Closes: #800337)
+
+ -- Michael R. Crusoe <crusoe@ucdavis.edu>  Fri, 18 Sep 2015 20:31:46 -0700
