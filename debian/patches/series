@@ -1,3 +1,4 @@
 autopkgtest
 use-external-fmt.patch
 use_system_catch.hpp
+expand-SOVERSION-with-minor-version.patch

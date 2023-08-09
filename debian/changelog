@@ -1,3 +1,81 @@
+spdlog (1:1.10.0+ds-0.4) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Breaks and Replaces libspdlog1 << 1:1.10.0+ds-0.3 (Closes: #1017700)
+    libspdlog1 1:1.10.0+ds-0.1 has same symlink libspdlog.so.1.10.0
+
+ -- Shengjing Zhu <zhsj@debian.org>  Fri, 19 Aug 2022 20:23:44 +0800
+
+spdlog (1:1.10.0+ds-0.3) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Upload to unstable.
+  * Rebuild with fmtlib 9.0.0.
+
+ -- Shengjing Zhu <zhsj@debian.org>  Fri, 19 Aug 2022 14:22:08 +0800
+
+spdlog (1:1.10.0+ds-0.2) experimental; urgency=medium
+
+  * Non-maintainer upload.
+  * Backport upstream SOVERSION change.
+    During spdlog 1.9 -> 1.10, upstream breaks ABI without bumping SOVERSION.
+    Upstream decides not to fix it for 1.10, but they will use
+    ${SPDLOG_VERSION_MAJOR}.${SPDLOG_VERSION_MINOR} as SOVERSION since 1.11.
+  * Bump SOVERSION to 1.10 (Closes: #1015742)
+
+ -- Shengjing Zhu <zhsj@debian.org>  Tue, 16 Aug 2022 00:25:52 +0800
+
+spdlog (1:1.10.0+ds-0.1) unstable; urgency=medium
+
+  * Non-maintainer upload.
+  * Upload to unstable. (Closes: #1014568)
+
+ -- Shengjing Zhu <zhsj@debian.org>  Thu, 28 Jul 2022 22:46:40 +0800
+
+spdlog (1:1.10.0+ds-0.1~exp2) experimental; urgency=medium
+
+  * Team upload.
+  * Rebuild without library symbols which are unsupportable for
+    c++ library.
+  * debian/libspdlog1.symbols: Dropped.
+
+ -- Boyuan Yang <byang@debian.org>  Sat, 11 Jun 2022 09:24:35 -0400
+
+spdlog (1:1.10.0+ds-0.1~exp1) experimental; urgency=medium
+
+  * Non-maintainer upload coordinated with maintainer team. (#1012566)
+
+  [ xiao sheng wen ]
+  * New upstream version 1.10.0+ds (Closes: #1012566)
+  * d/patches/use-external-fmt.patch: update for New upstream version 1.10.0+ds
+
+  [ Andreas Tille ]
+  * Add symbols file
+  * Standards-Version: 4.6.1 (routine-update)
+
+  [ Boyuan Yang ]
+  * debian/libspdlog1.symbols: Add Build-Depends-Package field.
+  * debian/libspdlog1.symbols: Activate SymbolsHelper for a test
+    experimental build.
+
+ -- Boyuan Yang <byang@debian.org>  Fri, 10 Jun 2022 20:25:58 -0400
+
+spdlog (1:1.9.2+ds-0.1) experimental; urgency=medium
+
+  * Non-maintainer upload with maintainer team acknowledgement.
+
+  [ Andreas Tille ]
+  * Team upload.
+  * New upstream version
+    Closes: #1000967
+  * d/watch: define proper filename
+  * Standards-Version: 4.6.0 (routine-update)
+
+  [ Boyuan Yang ]
+  * debian/control: Bump fmtlib version requirement to (>= 8.0.1).
+
+ -- Boyuan Yang <byang@debian.org>  Fri, 10 Dec 2021 14:52:53 -0500
+
 spdlog (1:1.8.5+ds-3) unstable; urgency=medium
 
   * Ignore vendored copy of catch.hpp; use the one from the catch2

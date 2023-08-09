@@ -1,41 +1,37 @@
 Author: Nilesh Patra <npatra974@gmail.com>
+        xiao sheng wen <atzlinux@sina.com>
 Description: Use external libfmt by default
-Last-Changed: Sun, May, 14 2020
+Last-Changed: Fri, 10 Jun 2022
 Forwarded: not-needed
---- spdlog.orig/CMakeLists.txt
-+++ spdlog/CMakeLists.txt
-@@ -80,7 +80,7 @@
- 
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 21577e5..ddfc018 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -81,7 +81,7 @@ option(SPDLOG_BUILD_WARNINGS "Enable compiler warnings" OFF)
  # install options
  option(SPDLOG_INSTALL "Generate the install target" ${SPDLOG_MASTER_PROJECT})
+ option(SPDLOG_USE_STD_FORMAT "Use std::format instead of fmt library. No compile-time format string checking." OFF)
 -option(SPDLOG_FMT_EXTERNAL "Use external fmt library instead of bundled" OFF)
 +option(SPDLOG_FMT_EXTERNAL "Use external fmt library instead of bundled" ON)
  option(SPDLOG_FMT_EXTERNAL_HO "Use external fmt header-only library instead of bundled" OFF)
  option(SPDLOG_NO_EXCEPTIONS "Compile with -fno-exceptions. Call abort() on any spdlog exceptions" OFF)
  
---- spdlog.orig/include/spdlog/tweakme.h
-+++ spdlog/include/spdlog/tweakme.h
-@@ -71,7 +71,7 @@
- // In this case spdlog will try to include <fmt/format.h> so set your -I flag
- // accordingly.
- //
--// #define SPDLOG_FMT_EXTERNAL
-+#define SPDLOG_FMT_EXTERNAL 1
- ///////////////////////////////////////////////////////////////////////////////
- 
- ///////////////////////////////////////////////////////////////////////////////
---- spdlog.orig/include/spdlog/fmt/bin_to_hex.h
-+++ spdlog/include/spdlog/fmt/bin_to_hex.h
+diff --git a/include/spdlog/fmt/bin_to_hex.h b/include/spdlog/fmt/bin_to_hex.h
+index 93e5c28..6f8e2fb 100644
+--- a/include/spdlog/fmt/bin_to_hex.h
++++ b/include/spdlog/fmt/bin_to_hex.h
 @@ -5,6 +5,7 @@
  
  #pragma once
  
 +#include <spdlog/tweakme.h>
  #include <cctype>
+ #include <spdlog/common.h>
  
- //
---- spdlog.orig/include/spdlog/fmt/fmt.h
-+++ spdlog/include/spdlog/fmt/fmt.h
+diff --git a/include/spdlog/fmt/fmt.h b/include/spdlog/fmt/fmt.h
+index fa4a2a8..682fda0 100644
+--- a/include/spdlog/fmt/fmt.h
++++ b/include/spdlog/fmt/fmt.h
 @@ -4,7 +4,7 @@
  //
  
@@ -45,31 +41,41 @@ Forwarded: not-needed
  //
  // Include a bundled header-only copy of fmtlib or an external one.
  // By default spdlog include its own copy.
-@@ -24,4 +24,4 @@
- #else // SPDLOG_FMT_EXTERNAL is defined - use external fmtlib
- #include <fmt/core.h>
- #include <fmt/format.h>
--#endif
-\ No newline at end of file
-+#endif
---- spdlog.orig/include/spdlog/fmt/ostr.h
-+++ spdlog/include/spdlog/fmt/ostr.h
-@@ -7,7 +7,7 @@
- //
+diff --git a/include/spdlog/fmt/ostr.h b/include/spdlog/fmt/ostr.h
+index 7588034..19d2e0b 100644
+--- a/include/spdlog/fmt/ostr.h
++++ b/include/spdlog/fmt/ostr.h
+@@ -8,6 +8,7 @@
  // include bundled or external copy of fmtlib's ostream support
  //
--
+ 
 +#include <spdlog/tweakme.h>
- #if !defined(SPDLOG_FMT_EXTERNAL)
- #ifdef SPDLOG_HEADER_ONLY
- #ifndef FMT_HEADER_ONLY
---- spdlog.orig/src/fmt.cpp
-+++ spdlog/src/fmt.cpp
+ #if !defined(SPDLOG_USE_STD_FORMAT)
+ #    if !defined(SPDLOG_FMT_EXTERNAL)
+ #        ifdef SPDLOG_HEADER_ONLY
+diff --git a/include/spdlog/tweakme.h b/include/spdlog/tweakme.h
+index 8fa60e4..8d6508f 100644
+--- a/include/spdlog/tweakme.h
++++ b/include/spdlog/tweakme.h
+@@ -71,7 +71,7 @@
+ // In this case spdlog will try to include <fmt/format.h> so set your -I flag
+ // accordingly.
+ //
+-// #define SPDLOG_FMT_EXTERNAL
++#define SPDLOG_FMT_EXTERNAL 1
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+diff --git a/src/fmt.cpp b/src/fmt.cpp
+index 8caa18d..cb043b3 100644
+--- a/src/fmt.cpp
++++ b/src/fmt.cpp
 @@ -6,6 +6,7 @@
- #error Please define SPDLOG_COMPILED_LIB to compile this file.
+ #    error Please define SPDLOG_COMPILED_LIB to compile this file.
  #endif
  
 +#include <spdlog/tweakme.h>
- #if !defined(SPDLOG_FMT_EXTERNAL)
- #include <spdlog/fmt/bundled/format-inl.h>
+ #if !defined(SPDLOG_FMT_EXTERNAL) && !defined(SPDLOG_USE_STD_FORMAT)
+ #    include <spdlog/fmt/bundled/format-inl.h>
  
+
