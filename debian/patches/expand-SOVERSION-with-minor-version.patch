@@ -1,0 +1,32 @@
+From: Shengjing Zhu <zhsj@debian.org>
+Date: Tue, 16 Aug 2022 00:16:16 +0800
+Subject: expand SOVERSION with minor version
+
+During spdlog 1.9 -> 1.10, upstream breaks ABI without bumping SOVERSION.
+Upstream decides not to fix it for 1.10, but they will use
+${SPDLOG_VERSION_MAJOR}.${SPDLOG_VERSION_MINOR} as SOVERSION since 1.11.
+
+However in Debian, the release team argues we need to fix the ABI breakage.
+So this patch backports upstream SOVERSION changes to 1.10.
+
+Bug: https://github.com/gabime/spdlog/issues/2454
+Bug-Debian: https://bugs.debian.org/1015742
+
+Origin: backports, https://github.com/gabime/spdlog/commit/e36b69a0
+---
+ CMakeLists.txt | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index ddfc018..1d7c6d0 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -169,7 +169,7 @@ target_include_directories(spdlog PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_LIST
+ target_link_libraries(spdlog PUBLIC Threads::Threads)
+ spdlog_enable_warnings(spdlog)
+ 
+-set_target_properties(spdlog PROPERTIES VERSION ${SPDLOG_VERSION} SOVERSION ${SPDLOG_VERSION_MAJOR})
++set_target_properties(spdlog PROPERTIES VERSION ${SPDLOG_VERSION} SOVERSION ${SPDLOG_VERSION_MAJOR}.${SPDLOG_VERSION_MINOR})
+ set_target_properties(spdlog PROPERTIES DEBUG_POSTFIX d)
+ 
+ if(COMMAND target_precompile_headers AND SPDLOG_ENABLE_PCH)

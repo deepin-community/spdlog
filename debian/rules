@@ -7,7 +7,7 @@ endif
 
 export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
-soversion = 1
+soversion = 1.10
 fmtabi = $(shell apt show libfmt-dev 2>/dev/null | sed -n 's/Depends: .*libfmt\([0-9]*\) .*/\1/p')
 spdlogfmtabi = libspdlog$(soversion)-fmt$(fmtabi)
 
