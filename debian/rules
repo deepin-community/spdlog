@@ -7,7 +7,7 @@ endif
 
 export DEB_BUILD_MAINT_OPTIONS=hardening=+all
 
-soversion = 1.10
+soversion = 1.12
 fmtabi = $(shell apt show libfmt-dev 2>/dev/null | sed -n 's/Depends: .*libfmt\([0-9]*\) .*/\1/p')
 spdlogfmtabi = libspdlog$(soversion)-fmt$(fmtabi)
 
@@ -43,6 +43,9 @@ override_dh_auto_install:
 	rm -f example/logs/.gitignore
 	dh_auto_install
 	find debian -name .gitignore -delete
+	find debian -name mongo_sink.h -delete  # no satisfiable in Debian
+	find debian -name tcp_client-windows.h -delete  # no satisfiable in Debian
+	find debian -name udp_client-windows.h -delete  # no satisfiable in Debian
 
 override_dh_gencontrol:
 	dh_gencontrol -- -Vspdlog:Provides=$(spdlogfmtabi)

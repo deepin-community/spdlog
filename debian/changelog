@@ -1,3 +1,46 @@
+spdlog (1:1.12.0+ds-2) unstable; urgency=medium
+
+  * Team upload.
+  * Specify minimum compatible version of catch2.
+
+ -- Andrius Merkys <merkys@debian.org>  Mon, 20 Nov 2023 05:04:22 -0500
+
+spdlog (1:1.12.0+ds-1) unstable; urgency=medium
+
+  * Team upload.
+  * Upload to unstable.
+
+ -- Andrius Merkys <merkys@debian.org>  Fri, 17 Nov 2023 01:43:49 -0500
+
+spdlog (1:1.12.0+ds-1~exp) experimental; urgency=medium
+
+  * Team upload
+
+  [ Andreas Tille ]
+  * New upstream version
+    Closes: #1053774, #1054684
+  * Remove constraints unnecessary since bullseye (oldstable):
+    + libspdlog1.10: Drop conflict with removed package nheko (<< 0.7.2-3+b1) in
+      Breaks.
+
+  [ Andrius Merkys ]
+  * Apply upstream patch to fix tests.
+  * Adapt to soversion change.
+
+ -- Andrius Merkys <merkys@debian.org>  Mon, 13 Nov 2023 01:49:23 -0500
+
+spdlog (1:1.10.0+ds-1) unstable; urgency=medium
+
+  * Acknowlege NMUs.
+  * d/watch: fix for GitHub breakage.
+  * d/control: libspdlog-dev suggests qtbase5-dev,  libsystemd-dev to
+    support optional features.
+  * d/rules: remove three headers that aren't usable on Debian. Closes:
+    #1035373
+  * Standards-Version: 4.6.2 (routine-update)
+
+ -- Michael R. Crusoe <crusoe@debian.org>  Mon, 25 Sep 2023 16:24:02 +0200
+
 spdlog (1:1.10.0+ds-0.4) unstable; urgency=medium
 
   * Non-maintainer upload.
