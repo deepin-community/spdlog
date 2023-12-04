@@ -3,21 +3,17 @@ Author: Nilesh Patra <npatra974@gmail.com>
 Description: Use external libfmt by default
 Last-Changed: Fri, 10 Jun 2022
 Forwarded: not-needed
-diff --git a/CMakeLists.txt b/CMakeLists.txt
-index 21577e5..ddfc018 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -81,7 +81,7 @@ option(SPDLOG_BUILD_WARNINGS "Enable compiler warnings" OFF)
- # install options
+@@ -88,7 +88,7 @@ option(SPDLOG_BUILD_WARNINGS "Enable com
+ option(SPDLOG_SYSTEM_INCLUDES "Include as system headers (skip for clang-tidy)." OFF)
  option(SPDLOG_INSTALL "Generate the install target" ${SPDLOG_MASTER_PROJECT})
- option(SPDLOG_USE_STD_FORMAT "Use std::format instead of fmt library. No compile-time format string checking." OFF)
+ option(SPDLOG_USE_STD_FORMAT "Use std::format instead of fmt library." OFF)
 -option(SPDLOG_FMT_EXTERNAL "Use external fmt library instead of bundled" OFF)
 +option(SPDLOG_FMT_EXTERNAL "Use external fmt library instead of bundled" ON)
  option(SPDLOG_FMT_EXTERNAL_HO "Use external fmt header-only library instead of bundled" OFF)
  option(SPDLOG_NO_EXCEPTIONS "Compile with -fno-exceptions. Call abort() on any spdlog exceptions" OFF)
  
-diff --git a/include/spdlog/fmt/bin_to_hex.h b/include/spdlog/fmt/bin_to_hex.h
-index 93e5c28..6f8e2fb 100644
 --- a/include/spdlog/fmt/bin_to_hex.h
 +++ b/include/spdlog/fmt/bin_to_hex.h
 @@ -5,6 +5,7 @@
@@ -28,8 +24,6 @@ index 93e5c28..6f8e2fb 100644
  #include <cctype>
  #include <spdlog/common.h>
  
-diff --git a/include/spdlog/fmt/fmt.h b/include/spdlog/fmt/fmt.h
-index fa4a2a8..682fda0 100644
 --- a/include/spdlog/fmt/fmt.h
 +++ b/include/spdlog/fmt/fmt.h
 @@ -4,7 +4,7 @@
@@ -41,8 +35,6 @@ index fa4a2a8..682fda0 100644
  //
  // Include a bundled header-only copy of fmtlib or an external one.
  // By default spdlog include its own copy.
-diff --git a/include/spdlog/fmt/ostr.h b/include/spdlog/fmt/ostr.h
-index 7588034..19d2e0b 100644
 --- a/include/spdlog/fmt/ostr.h
 +++ b/include/spdlog/fmt/ostr.h
 @@ -8,6 +8,7 @@
@@ -53,11 +45,9 @@ index 7588034..19d2e0b 100644
  #if !defined(SPDLOG_USE_STD_FORMAT)
  #    if !defined(SPDLOG_FMT_EXTERNAL)
  #        ifdef SPDLOG_HEADER_ONLY
-diff --git a/include/spdlog/tweakme.h b/include/spdlog/tweakme.h
-index 8fa60e4..8d6508f 100644
 --- a/include/spdlog/tweakme.h
 +++ b/include/spdlog/tweakme.h
-@@ -71,7 +71,7 @@
+@@ -78,7 +78,7 @@
  // In this case spdlog will try to include <fmt/format.h> so set your -I flag
  // accordingly.
  //
@@ -66,16 +56,3 @@ index 8fa60e4..8d6508f 100644
  ///////////////////////////////////////////////////////////////////////////////
  
  ///////////////////////////////////////////////////////////////////////////////
-diff --git a/src/fmt.cpp b/src/fmt.cpp
-index 8caa18d..cb043b3 100644
---- a/src/fmt.cpp
-+++ b/src/fmt.cpp
-@@ -6,6 +6,7 @@
- #    error Please define SPDLOG_COMPILED_LIB to compile this file.
- #endif
- 
-+#include <spdlog/tweakme.h>
- #if !defined(SPDLOG_FMT_EXTERNAL) && !defined(SPDLOG_USE_STD_FORMAT)
- #    include <spdlog/fmt/bundled/format-inl.h>
- 
-

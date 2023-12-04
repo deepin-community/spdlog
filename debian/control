@@ -9,8 +9,8 @@ Build-Depends: debhelper-compat (= 13),
                libsystemd-dev [linux-any],
                libfmt-dev (>= 9.0.0),
                pkg-kde-tools,
-               catch2
-Standards-Version: 4.6.1
+               catch2 (>= 3.0.0)
+Standards-Version: 4.6.2
 Vcs-Browser: https://salsa.debian.org/med-team/spdlog
 Vcs-Git: https://salsa.debian.org/med-team/spdlog.git
 Homepage: https://github.com/gabime/spdlog
@@ -19,10 +19,12 @@ Rules-Requires-Root: no
 Package: libspdlog-dev
 Architecture: any
 Multi-Arch: same
-Depends: libspdlog1.10 (= ${binary:Version}),
+Depends: libspdlog1.12 (= ${binary:Version}),
          libfmt-dev (>= 9.0.0),
-         catch2,
+         catch2 (>= 3.0.0),
          ${misc:Depends}
+Suggests: qtbase5-dev,
+          libsystemd-dev
 Description: Very fast, header only or compiled, C++ logging library
  Features: Very fast - performance is the primary goal; Headers only; No
  dependencies - just copy and use; call style using the excellent cppformat
@@ -36,20 +38,15 @@ Description: Very fast, header only or compiled, C++ logging library
  Various log targets:
  Rotating log files, Daily log files, Console logging, Linux syslog.
 
-Package: libspdlog1.10
+Package: libspdlog1.12
 Architecture: any
 Multi-Arch: same
 Section: libs
 Depends: ${shlibs:Depends},
          ${misc:Depends}
-Breaks: bear (<< 3.0.5-1),
-        libear (<< 3.0.5-1),
-        libpurify2.0 (<< 2.0.0-5+b2),
-        nheko (<< 0.7.2-3+b1),
-        purify (<< 2.0.0-5+b2),
-        libspdlog1 (<< 1:1.10.0+ds-0.3)
-Replaces: libspdlog1 (<< 1:1.10.0+ds-0.3)
+Breaks: libspdlog1 (<< 1:1.10.0+ds-0.3)
 Provides: ${spdlog:Provides}
+Replaces: libspdlog1 (<< 1:1.10.0+ds-0.3)
 Description: Very fast C++ logging library
  Features: Very fast - performance is the primary goal; Headers only; No
  dependencies - just copy and use; call style using the excellent cppformat
