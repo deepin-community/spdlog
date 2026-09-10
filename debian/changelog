@@ -1,3 +1,9 @@
+spdlog (1:1.12.0+ds-3) unstable; urgency=medium
+
+  * Rebuild with LTO enabled (dpkg vendor feature optimize/lto).
+
+ -- tunaichao <tunaichao@uniontech.com>  Thu, 10 Sep 2026 20:52:51 +0800
+
 spdlog (1:1.12.0+ds-2) unstable; urgency=medium
 
   * Team upload.
