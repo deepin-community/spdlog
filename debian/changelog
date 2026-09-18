@@ -1,3 +1,10 @@
+spdlog (1:1.12.0+ds-2deepin1) unstable; urgency=medium
+
+  * d/rules: Use dpkg-query instead of apt as apt might not present in
+    build environment
+
+ -- Tianyu Chen <sweetyfish@deepin.org>  Wed, 16 Sep 2026 10:21:26 +0800
+
 spdlog (1:1.12.0+ds-2) unstable; urgency=medium
 
   * Team upload.
